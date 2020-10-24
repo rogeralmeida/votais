@@ -1,8 +1,13 @@
 import React from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 const VotarPage: React.FC<{}> = () => {
-  return (
+  const [voted, setVoted] = React.useState(false)
+  const vote = () => {
+    setVoted(true)
+  }
+  const form = (
     <Row>
       <Col>
         <Form>
@@ -30,10 +35,13 @@ const VotarPage: React.FC<{}> = () => {
               <option value="3">Outro Candidato</option>
             </Form.Control>
           </Form.Group>
+          <Button onClick={vote}>Votar</Button>
         </Form>
       </Col>
     </Row>
   )
+  const redirect = (<Redirect to="/cidade" />)
+  return voted ? redirect : form
 }
 
 export default VotarPage;
